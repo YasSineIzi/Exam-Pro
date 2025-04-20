@@ -1,0 +1,149 @@
+   /* Général */
+   body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    color: #2c3e50;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #ffffff;
+    height: 100vh;
+    position: fixed;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    color: #3498db;
+    font-weight: 600;
+    text-align: center;
+}
+
+.sidebar .nav-link {
+    color: #34495e;
+    font-size: 1rem;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.sidebar .nav-link.active {
+    color: white;
+    background-color: #3498db;
+}
+
+/* Main Content */
+main {
+    margin-left: 250px;
+    padding: 30px;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+    .sidebar {
+        position: static;
+        height: auto;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    main {
+        margin-left: 0;
+        padding: 20px;
+    }
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #ffffff;
+    height: 100vh;
+    position: fixed;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    color: #3498db;
+    font-weight: 600;
+    text-align: center;
+}
+
+.sidebar .nav-link {
+    color: #34495e;
+    font-size: 1rem;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    /* Adding transition for smooth effect */
+    display: block;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #3498db;
+    color: white;
+    transform: translateX(10px);
+    /* Added slide effect on hover */
+}
+
+.sidebar .nav-link:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.sidebar .nav-link.active {
+    color: white;
+    background-color: #3498db;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Table row hover effect */
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+    /* Light grey color */
+    cursor: pointer;
+}
+
+/* Delete button hover effect */
+.table .btn-danger:hover {
+    background-color: #c0392b;
+    /* Darker red */
+    color: white;
+}
+
+/* Table styling */
+.table th,
+.table td {
+    text-align: center;
+    vertical-align: middle;
+}

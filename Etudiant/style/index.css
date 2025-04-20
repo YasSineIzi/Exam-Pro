@@ -1,0 +1,125 @@
+/* Add these styles below your existing navbar CSS */
+:root {
+    --primary-color: #6366f1;
+    --text-color: #0f172a;
+    --background-color: #f8fafc;
+    --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.content-header h1 {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.profile-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+}
+
+.profile-link:hover {
+    background: var(--background-color);
+    color: var(--primary-color);
+}
+
+.courses-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.course-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s ease;
+    border: 1px solid #f1f5f9;
+}
+
+.course-card:hover {
+    transform: translateY(-2px);
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+}
+
+.card-text {
+    color: #64748b;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.download-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.download-button:hover {
+    background: #4f46e5;
+}
+
+.no-file {
+    color: #94a3b8;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.error-message {
+    padding: 1rem;
+    background: #fee2e2;
+    color: #dc2626;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #fecaca;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1rem;
+    }
+
+    .courses-container {
+        grid-template-columns: 1fr;
+    }
+
+    .content-header h1 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-link span {
+        display: none;
+    }
+}

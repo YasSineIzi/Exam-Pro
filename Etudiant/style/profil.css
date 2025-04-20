@@ -1,0 +1,340 @@
+
+        /* Profile Photo Section */
+        .profile-photo-section {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #f1f5f9;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .profile-image:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 12px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffffff;
+            color: var(--primary-color, #6366f1);
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            border: 2px solid #f1f5f9;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color, #6366f1);
+            color: white;
+            border-color: var(--primary-color, #6366f1);
+            transform: translateX(-50%) translateY(-2px);
+        }
+
+        .btn-secondary i {
+            font-size: 0.95rem;
+        }
+
+        /* Hover effect container */
+        .profile-photo-section:hover .profile-image {
+            border-color: var(--primary-color, #6366f1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-photo-section {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .btn-secondary {
+                position: static;
+                transform: none;
+                width: fit-content;
+            }
+        }
+
+        /* Image Upload Overlay */
+        .profile-photo-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        /* Add to existing button styles */
+        .btn-primary {
+            background: var(--primary-color, #6366f1);
+            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 2px 4px rgba(99, 102, 241, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn-primary:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary i {
+            font-size: 1.1rem;
+            transition: transform 0.2s ease;
+        }
+
+        /* Lock icon animation */
+        .btn-primary:hover i {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .btn-primary {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem;
+            }
+        }
+
+        /* Loading state (optional) */
+        .btn-primary.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .btn-primary.loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .btn-primary {
+            background: var(--primary-color, #6366f1);
+            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 2px 4px rgba(99, 102, 241, 0.15);
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn-primary:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary i {
+            font-size: 1.1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .btn-primary {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem;
+            }
+        }
+
+        /* Profile Page Styles */
+        .profile-card,
+        .settings-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+            margin-bottom: 2rem;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 3rem;
+        }
+
+        .profile-photo-section {
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            border: 3px solid #f1f5f9;
+        }
+
+        .profile-info-section h2,
+        .settings-card h2 {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #f8fafc;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:disabled {
+            background: #e2e8f0;
+            cursor: not-allowed;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .alert-message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .alert-message.error {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .alert-message.success {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        @media (max-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .profile-photo-section {
+                text-align: left;
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            .profile-image {
+                margin-bottom: 0;
+                width: 100px;
+                height: 100px;
+            }
+
+            .card-body {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-photo-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .profile-image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .form-input {
+                padding: 0.75rem;
+            }
+        }
+    

@@ -1,0 +1,161 @@
+    /* Custom Variables */
+    :root {
+        --primary-color: #0d6efd;
+        --success-color: #198754;
+        --secondary-color: #6c757d;
+        --input-border: #ced4da;
+        --input-focus: #86b7fe;
+        --card-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        --transition-speed: 0.3s;
+    }
+
+    /* Body and Container Styles */
+    body {
+        background-color: #f8f9fa;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 1140px;
+    }
+
+    /* Card Styles */
+    .card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: var(--card-shadow);
+        overflow: hidden;
+    }
+
+    .card-header {
+        background: linear-gradient(45deg, var(--primary-color), #0b5ed7);
+        padding: 1.5rem;
+        border-bottom: none;
+    }
+
+    .card-header h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    /* Form Styles */
+    .form-label {
+        font-weight: 500;
+        color: #495057;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+        border: 2px solid var(--input-border);
+        font-size: 1rem;
+        transition: all var(--transition-speed);
+    }
+
+    .form-control:focus {
+        border-color: var(--input-focus);
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+    /* Button Styles */
+    .btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: all var(--transition-speed);
+    }
+
+    .btn-success {
+        background-color: var(--success-color);
+        border-color: var(--success-color);
+    }
+
+    .btn-success:hover {
+        background-color: #157347;
+        border-color: #146c43;
+        transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+    }
+
+    .btn-secondary:hover {
+        background-color: #5c636a;
+        border-color: #565e64;
+        transform: translateY(-2px);
+    }
+
+    /* Alert Styles */
+    .alert {
+        border-radius: 0.5rem;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1.5rem;
+        border: none;
+        font-weight: 500;
+    }
+
+    .alert-success {
+        background-color: #d1e7dd;
+        color: #0f5132;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #842029;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.625rem 1.25rem;
+        }
+
+        .d-flex {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    }
+
+    /* Input Group Animations */
+    .mb-3 {
+        position: relative;
+        margin-bottom: 1.5rem !important;
+    }
+
+    .form-control:focus+.form-label,
+    .form-control:not(:placeholder-shown)+.form-label {
+        transform: translateY(-1.5rem);
+        font-size: 0.875rem;
+        color: var(--primary-color);
+    }
+
+    /* Password Field Enhancement */
+    #password {
+        letter-spacing: 0.1em;
+    }
+
+    /* Custom Shadow Effects */
+    .shadow {
+        box-shadow: var(--card-shadow) !important;
+    }
+
+    .shadow:hover {
+        box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2) !important;
+        transition: box-shadow var(--transition-speed);
+    }
