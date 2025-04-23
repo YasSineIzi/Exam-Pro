@@ -8,6 +8,20 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+// Récupérer la liste des classes/groupes disponibles
+$classes = [];
+try {
+    $stmt = $conn->prepare("SELECT Id_c, Nom_c FROM class ORDER BY Nom_c");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $classes[] = $row;
+    }
+} catch (Exception $e) {
+    // Gérer l'erreur (peut-être loguer l'erreur)
+    error_log('Erreur lors de la récupération des classes: ' . $e->getMessage());
+}
+
 // Fonction pour enregistrer l'examen
 function saveExam($conn, $examData)
 {
@@ -15,8 +29,8 @@ function saveExam($conn, $examData)
         $conn->begin_transaction();
 
         // Insérer l'examen
-        $stmt = $conn->prepare("INSERT INTO exams (title, description, duration, user_id, course_id, status) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param('ssiiis', $examData['title'], $examData['description'], $examData['duration'], $examData['user_id'], $examData['course_id'], $examData['status']);
+        $stmt = $conn->prepare("INSERT INTO exams (title, description, duration, user_id, course_id, status, class_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param('ssiissi', $examData['title'], $examData['description'], $examData['duration'], $examData['user_id'], $examData['course_id'], $examData['status'], $examData['class_id']);
         $stmt->execute();
 
         // Récupérer l'ID de l'examen inséré
@@ -64,7 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'duration' => $_POST['examDuration'],
             'course_id' => $_POST['courseId'],
             'user_id' => $_SESSION['user_id'],
-            'status' => 'published'
+            'status' => 'published',
+            'class_id' => $_POST['classId']
         ];
 
         // Enregistrer l'examen
@@ -127,11 +142,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div class="mb-3">
                                     <label for="examDuration" class="form-label">Durée (minutes)</label>
                                     <input type="number" class="form-control" id="examDuration" name="examDuration"
-                                        value="60" min="15" required>
+                                        value="60" min="1" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="courseId" class="form-label">ID du cours</label>
                                     <input type="text" class="form-control" id="courseId" name="courseId" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="classId" class="form-label">Groupe qui passera l'examen</label>
+                                    <select class="form-select" id="classId" name="classId" required>
+                                        <option value="">Sélectionner un groupe</option>
+                                        <?php foreach ($classes as $class): ?>
+                                            <option value="<?php echo $class['Id_c']; ?>">
+                                                <?php echo htmlspecialchars($class['Nom_c']); ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -328,6 +354,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     examDescription: formData.get('examDescription'),
                     examDuration: formData.get('examDuration'),
                     courseId: formData.get('courseId'),
+                    classId: formData.get('classId'),
                     questions: JSON.stringify(questions)
                 })
             });

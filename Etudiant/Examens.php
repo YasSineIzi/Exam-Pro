@@ -23,19 +23,32 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $exams = [];
+$student_id = $_SESSION['user_id'];
 
 try {
-    // Query to fetch published exams and check if student has already taken them
+    // First, get the student's class_id
+    $stmt = $pdo->prepare("SELECT class_id FROM users WHERE id = ?");
+    $stmt->execute([$student_id]);
+    $student = $stmt->fetch();
+    $student_class_id = $student['class_id'];
+    
+    // Query to fetch published exams that are either:
+    // 1. Assigned to the student's class, OR
+    // 2. Not assigned to any specific class (class_id is NULL)
+    // Also check if student has already taken them
     $stmt = $pdo->prepare("
         SELECT e.*, 
-            CASE WHEN sa.student_id IS NOT NULL THEN 1 ELSE 0 END as has_taken
+            CASE WHEN sa.student_id IS NOT NULL THEN 1 ELSE 0 END as has_taken,
+            c.Nom_c as class_name
         FROM exams e
         LEFT JOIN student_answers sa ON e.id = sa.exam_id 
             AND sa.student_id = ?
+        LEFT JOIN class c ON e.class_id = c.Id_c
         WHERE e.published = 1
+        AND (e.class_id = ? OR e.class_id IS NULL)
         GROUP BY e.id
     ");
-    $stmt->execute([$_SESSION['user_id']]);
+    $stmt->execute([$student_id, $student_class_id]);
     $exams = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
@@ -53,6 +66,22 @@ try {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./style/Examens.css">
     <script src="script.js"></script>
+    <style>
+        .exam-class {
+            display: inline-flex;
+            align-items: center;
+            margin-left: 1rem;
+            padding: 0.25rem 0.75rem;
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        
+        .exam-class i {
+            margin-right: 0.35rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -95,6 +124,17 @@ try {
                                                 <i class="fas fa-clock"></i>
                                                 <?= htmlspecialchars($exam['duration']) ?> minutes
                                             </span>
+                                            <?php if (!empty($exam['class_name'])): ?>
+                                            <span class="exam-class">
+                                                <i class="fas fa-users"></i>
+                                                <?= htmlspecialchars($exam['class_name']) ?>
+                                            </span>
+                                            <?php else: ?>
+                                            <span class="exam-class">
+                                                <i class="fas fa-globe"></i>
+                                                Tous les groupes
+                                            </span>
+                                            <?php endif; ?>
                                         </div>
                                         <h3 class="exam-title"><?= htmlspecialchars($exam['title']) ?></h3>
                                         <p class="exam-description"><?= htmlspecialchars($exam['description']) ?></p>

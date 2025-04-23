@@ -1,0 +1,46 @@
+Instructions pour mettre à jour la base de données ExamPro
+
+Pour ajouter la fonctionnalité de sélection de groupe lors de la création d'un examen, vous devez ajouter un champ à la table 'exams' dans votre base de données et créer une relation de clé étrangère.
+
+## IMPORTANT: Intégrité référentielle
+
+L'ajout d'une clé étrangère est essentiel pour maintenir l'intégrité de votre base de données. Cette relation:
+- Empêche d'associer un examen à un groupe qui n'existe pas
+- Gère automatiquement les cas où un groupe est supprimé (en rendant l'examen disponible pour tous)
+- Permet aux jointures SQL de fonctionner correctement
+
+## Mise à jour de la base de données
+
+Voici comment procéder:
+
+1. Ouvrez phpMyAdmin en accédant à http://localhost/phpmyadmin
+2. Sélectionnez votre base de données ExamPro
+3. Cliquez sur l'onglet "SQL" pour exécuter une requête
+4. Copiez et collez le contenu du fichier "add_class_id_to_exams.sql" dans la fenêtre de requête
+5. Cliquez sur "Exécuter"
+
+Ou en utilisant la ligne de commande MySQL:
+
+```
+mysql -u [username] -p [database_name] < add_class_id_to_exams.sql
+```
+
+Remplacez [username] par votre nom d'utilisateur MySQL et [database_name] par le nom de votre base de données.
+
+## Vérification des modifications
+
+Pour vérifier que les modifications ont été correctement appliquées:
+
+1. Accédez à http://localhost/Exam-Pro-main/verify_db_changes.php
+2. Vérifiez que:
+   - La colonne class_id existe dans la table exams
+   - La contrainte de clé étrangère est correctement configurée (référençant class.Id_c)
+   - Les règles de suppression (SET NULL) et de mise à jour (CASCADE) sont correctement définies
+
+Si les vérifications échouent, réexécutez le script SQL et assurez-vous qu'aucune erreur n'est signalée.
+
+## Après la mise à jour
+
+Une fois ces étapes terminées, vous pourrez assigner un groupe à chaque examen que vous créez:
+- Les examens sans groupe spécifique (class_id = NULL) seront visibles par tous les étudiants
+- Les examens avec un groupe spécifique ne seront visibles que par les étudiants de ce groupe 

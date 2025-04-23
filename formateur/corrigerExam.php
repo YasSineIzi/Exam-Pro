@@ -1,6 +1,42 @@
 <?php
 session_start();
 require_once '../db.php';
+
+/**
+ * Helper function to format activity types in human-readable form
+ */
+function formatActivityType($type) {
+    $types = [
+        'session_start' => 'Début de session',
+        'session_end' => 'Fin de session',
+        'copy_attempt' => 'Tentative de copie',
+        'cut_attempt' => 'Tentative de couper',
+        'paste_attempt' => 'Tentative de coller',
+        'tab_switch' => 'Changement d\'onglet',
+        'returned_to_exam' => 'Retour à l\'examen',
+        'right_click_attempt' => 'Clic droit',
+        'print_screen_attempt' => 'Capture d\'écran',
+        'print_attempt' => 'Tentative d\'impression',
+        'alt_tab_detected' => 'Alt+Tab détecté',
+        'dev_tools_attempt' => 'Outils développeur',
+        'exit_fullscreen' => 'Sortie plein écran',
+        'idle_detected' => 'Inactivité détectée',
+        'suspicious_resize' => 'Redimensionnement suspect',
+        'attempted_page_exit' => 'Tentative de quitter',
+        'max_warnings_exceeded' => 'Avertissements max',
+    ];
+    
+    return $types[$type] ?? $type;
+}
+
+/**
+ * Helper function to format date and time
+ */
+function formatDateTime($dateTime) {
+    $date = new DateTime($dateTime);
+    return $date->format('d/m/Y H:i:s');
+}
+
 // Récupérer l'ID de l'examen et l'ID de l'étudiant depuis l'URL
 if (!isset($_GET['exam_id']) || !isset($_GET['student_id'])) {
     die("ID de l'examen ou de l'étudiant manquant.");
@@ -13,7 +49,7 @@ if ($exam_id === false || $student_id === false) {
 }
 
 try {
-    $stmt = $conn->prepare("SELECT name FROM exams WHERE id = ?");
+    $stmt = $conn->prepare("SELECT name, title FROM exams WHERE id = ?");
     $stmt->bind_param("i", $exam_id);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -22,6 +58,58 @@ try {
     if (!$exam) {
         die("Examen non trouvé.");
     }
+    
+    // Récupérer les informations de l'étudiant
+    $stmt = $conn->prepare("SELECT name, email, class_id FROM users WHERE id = ?");
+    $stmt->bind_param("i", $student_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $student = $result->fetch_assoc();
+    
+    if (!$student) {
+        die("Étudiant non trouvé.");
+    }
+    
+    // Récupérer le nom de la classe
+    if ($student['class_id']) {
+        $stmt = $conn->prepare("SELECT Nom_c FROM class WHERE Id_c = ?");
+        $stmt->bind_param("i", $student['class_id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $class = $result->fetch_assoc();
+        $student['class_name'] = $class ? $class['Nom_c'] : 'Non spécifié';
+    } else {
+        $student['class_name'] = 'Non spécifié';
+    }
+    
+    // Récupérer les activités suspectes pour cet étudiant et cet examen
+    $cheating_attempts = [];
+    if ($conn->query("SHOW TABLES LIKE 'exam_activity_logs'")->num_rows > 0) {
+        $stmt = $conn->prepare("
+            SELECT activity_type, COUNT(*) as count, 
+                   MIN(created_at) as first_occurrence, 
+                   MAX(created_at) as last_occurrence
+            FROM exam_activity_logs 
+            WHERE user_id = ? AND exam_id = ?
+            GROUP BY activity_type 
+            ORDER BY count DESC
+        ");
+        $stmt->bind_param("ii", $student_id, $exam_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $cheating_attempts = $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    // Récupérer le score actuel et le statut
+    $stmt = $conn->prepare("
+        SELECT score, status FROM results 
+        WHERE student_id = ? AND exam_id = ? 
+        LIMIT 1
+    ");
+    $stmt->bind_param("ii", $student_id, $exam_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $current_result = $result->fetch_assoc();
 } catch (Exception $e) {
     die("Erreur : " . $e->getMessage());
 }
@@ -108,8 +196,94 @@ function getQuestionOptions($conn, $question_id)
 
 <body>
     <div class="container mt-5">
-        <h1>Corriger l'examen : <?= htmlspecialchars($exam['name']) ?></h1>
-        <h2>Réponses de l'étudiant (ID : <?= htmlspecialchars($student_id) ?>)</h2>
+        <h1>Corriger l'examen : <?= htmlspecialchars($exam['title'] ?? $exam['name']) ?></h1>
+        
+        <!-- Informations sur l'étudiant -->
+        <div class="card mb-4 border-0 shadow-sm">
+            <div class="card-header bg-light">
+                <h2 class="h5 mb-0"><i class="fas fa-user-graduate me-2"></i>Informations de l'étudiant</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Nom:</strong> <?= htmlspecialchars($student['name'] ?? 'Non disponible') ?></p>
+                        <p><strong>Email:</strong> <?= htmlspecialchars($student['email'] ?? 'Non disponible') ?></p>
+                        <p><strong>Groupe:</strong> <?= htmlspecialchars($student['class_name'] ?? 'Non disponible') ?></p>
+                    </div>
+                    <div class="col-md-6">
+                        <?php if (isset($current_result)): ?>
+                            <p><strong>Score actuel:</strong> <?= $current_result['score'] ? htmlspecialchars($current_result['score']) : 'Non noté' ?></p>
+                            <p><strong>Statut:</strong> 
+                                <span class="badge <?= $current_result['status'] === 'pass' ? 'bg-success' : ($current_result['status'] === 'fail' ? 'bg-danger' : 'bg-warning') ?>">
+                                    <?= $current_result['status'] === 'pass' ? 'Réussi' : ($current_result['status'] === 'fail' ? 'Échoué' : 'En attente') ?>
+                                </span>
+                            </p>
+                        <?php else: ?>
+                            <p><strong>Score actuel:</strong> Non noté</p>
+                            <p><strong>Statut:</strong> <span class="badge bg-warning">En attente</span></p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Suspicious Activities -->
+        <div class="card mt-3">
+            <div class="card-header bg-warning text-white">
+                <h5 class="mb-0">Activités suspectes</h5>
+            </div>
+            <div class="card-body">
+                <?php if (count($cheating_attempts) > 0) : ?>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Type d'activité</th>
+                                    <th>Nombre</th>
+                                    <th>Première occurrence</th>
+                                    <th>Dernière occurrence</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($cheating_attempts as $activity) : ?>
+                                    <tr>
+                                        <td><?php 
+                                            // Ensure the function exists and the activity type is valid
+                                            echo function_exists('formatActivityType') ? 
+                                                formatActivityType($activity['activity_type'] ?? 'unknown') : 
+                                                ($activity['activity_type'] ?? 'unknown'); 
+                                        ?></td>
+                                        <td><?php echo $activity['count']; ?></td>
+                                        <td><?php 
+                                            // Ensure the function exists and the date is valid
+                                            echo function_exists('formatDateTime') && !empty($activity['first_occurrence']) ? 
+                                                formatDateTime($activity['first_occurrence']) : 
+                                                ($activity['first_occurrence'] ?? 'N/A'); 
+                                        ?></td>
+                                        <td><?php 
+                                            // Ensure the function exists and the date is valid
+                                            echo function_exists('formatDateTime') && !empty($activity['last_occurrence']) ? 
+                                                formatDateTime($activity['last_occurrence']) : 
+                                                ($activity['last_occurrence'] ?? 'N/A'); 
+                                        ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="alert alert-info mt-3">
+                        <p><strong>Note:</strong> La présence d'activités suspectes peut indiquer des tentatives de tricherie. Veuillez en tenir compte lors de l'évaluation.</p>
+                        <a href="view_suspicious_activities.php?exam_id=<?php echo $exam_id; ?>&student_id=<?php echo $student_id; ?>" class="btn btn-sm btn-info">Voir les logs détaillés</a>
+                    </div>
+                <?php else : ?>
+                    <div class="alert alert-success">
+                        <p>Aucune activité suspecte détectée pour cet étudiant.</p>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <h2>Réponses de l'étudiant</h2>
 
         <form action="save_correction.php" method="post" id="correction-form">
             <input type="hidden" name="exam_id" value="<?= htmlspecialchars($exam_id) ?>">

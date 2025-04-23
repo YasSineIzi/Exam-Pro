@@ -32,10 +32,12 @@ try {
     $stmt = $pdo->prepare("
         SELECT e.*, 
             COUNT(DISTINCT q.id) as question_count,
-            COUNT(DISTINCT sa.student_id) as student_count
+            COUNT(DISTINCT sa.student_id) as student_count,
+            c.Nom_c as class_name
         FROM exams e
         LEFT JOIN questions q ON e.id = q.exam_id
         LEFT JOIN student_answers sa ON e.id = sa.exam_id
+        LEFT JOIN class c ON e.class_id = c.Id_c
         WHERE e.user_id = :user_id
         GROUP BY e.id
         ORDER BY e.created_at DESC
@@ -495,6 +497,10 @@ try {
                                 <span class="stat">
                                     <i class="fas fa-calendar"></i>
                                     <?= isset($exam['created_at']) ? date('d/m/Y', strtotime($exam['created_at'])) : date('d/m/Y') ?>
+                                </span>
+                                <span class="stat">
+                                    <i class="fas fa-users"></i>
+                                    <?= !empty($exam['class_name']) ? htmlspecialchars($exam['class_name']) : 'Tous les groupes' ?>
                                 </span>
                             </div>
 
