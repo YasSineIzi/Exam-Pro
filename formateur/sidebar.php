@@ -154,10 +154,6 @@
         justify-content: center;
     }
 
-
-
-
-
     .sidebar.collapsed .logo i {
         /* margin: 0; */
     }
@@ -247,8 +243,12 @@
                 <span>Examens Créés</span>
             </a>
         </li>
-        
-        
+        <!-- <li class="nav-item">
+    <a href="activities.php" class="nav-link">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span>Activités Suspectes</span>
+    </a>
+</li> -->
         <li class="nav-item">
             <a href="students_who_took_exam.php" class="nav-link">
                 <i class="fas fa-users"></i>

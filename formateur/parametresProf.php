@@ -158,11 +158,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paramètres du Compte - ExamPro</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="./style/parametresProf.css">
 </head>
-<body>
 
+<body>
     <?php include 'sidebar.php'; ?>
     <div class="container-fluid">
         <main class="main-content">
@@ -179,7 +179,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="email" id="email" name="email" class="form-control"
                             value="<?= htmlspecialchars($user['email']) ?>" required>
                     </div>
-
                     <h2><i class="fas fa-lock"></i> Modifier le mot de passe</h2>
                     <div class="form-group">
                         <label for="currentPassword" class="form-label">Mot de passe actuel</label>
@@ -209,7 +208,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </button>
                         </div>
                     </div>
-
                     <h2><i class="fas fa-bell"></i> Préférences de notification</h2>
                     <div class="form-group">
                         <label class="switch">
@@ -249,6 +247,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </main>
     </div>
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-    </body>
+    <script>
+        // Password toggle functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleButtons = document.querySelectorAll('.password-toggle');
+
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const targetId = this.getAttribute('data-target');
+                    const passwordInput = document.getElementById(targetId);
+                    const icon = this.querySelector('i');
+
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        passwordInput.type = 'password';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
 
 </html>

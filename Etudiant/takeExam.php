@@ -69,7 +69,7 @@ try {
             }
         }
     }
-    unset($question); 
+    unset($question);
 
 } catch (Exception $e) {
     echo "Erreur : " . $e->getMessage();
@@ -98,22 +98,22 @@ try {
             display: flex;
             align-items: center;
         }
-        
+
         .cheating-notice i {
             font-size: 24px;
             margin-right: 15px;
             color: #e0a800;
         }
-        
+
         .cheating-notice ul {
             margin-bottom: 0;
         }
-        
+
         .cheating-notice h5 {
             color: #e0a800;
             margin-bottom: 10px;
         }
-        
+
         .arabic-proverb {
             font-size: 1.5rem;
             text-align: center;
@@ -121,7 +121,7 @@ try {
             font-weight: bold;
             font-family: 'Traditional Arabic', 'Scheherazade New', serif;
         }
-        
+
         .proverb-translation {
             text-align: center;
             font-style: italic;
@@ -136,7 +136,7 @@ try {
         <div class="progress-bar" id="progress-bar"></div>
     </div>
 
-    
+
 
     <div class="page-header">
         <div class="container">
@@ -197,72 +197,98 @@ try {
                 transform: translateY(0);
             }
         }
+
         .col-md-6 {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-}
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
 
 
 
-h5 {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #007bff;
-    display: flex;
-    align-items: center;
-}
+        h5 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #007bff;
+            display: flex;
+            align-items: center;
+        }
 
-h5 i {
-    color:rgb(164, 7, 255);
-    font-size: 1.5rem;
-}
+        h5 i {
+            color: rgb(164, 7, 255);
+            font-size: 1.5rem;
+        }
 
-ul {
-    padding-left: 20px;
-}
+        ul {
+            padding-left: 20px;
+        }
 
-ul li {
-    font-size: 1rem;
-    margin-bottom: 8px;
-    position: relative;
-    padding-left: 25px;
-}
+        ul li {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+        }
 
-ul li::before {
-    content: "✔";
-    position: absolute;
-    left: 0;
-    color: #28a745;
-    font-weight: bold;
-}
-
+        ul li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
     </style>
 
     <div class="container mb-5">
         <div class="exam-info">
             <div class="row">
-                <div class="col-md-6">
-                    <h5><i class="fas fa-info-circle me-2"></i>Instructions</h5>
-                    <ul class="mb-0">
-                        <li>Lisez attentivement chaque question avant de répondre</li>
-                        <li>Assurez-vous de répondre à toutes les questions</li>
-                        <li>Vérifiez vos réponses avant de soumettre</li>
-                    </ul>
-                </div>
-                <?php if (isset($exam['duration']) && $exam['duration'] > 0): ?>
-        <div class="timer">
-            <i class="fas fa-clock"></i>
-            <span id="timer"></span>
+            <div class="exam-instructions bg-white p-4 rounded shadow-sm mb-4">
+    <div class="row align-items-center">
+        <!-- Instructions Section -->
+        <div class="col-md-8">
+            <h5 class="text-primary mb-3">
+                <i class="fas fa-info-circle me-2"></i>Instructions de l'examen
+            </h5>
+            <ul class="list-unstyled ps-3">
+                <li class="mb-2">
+                    <i class="fas fa-check text-success me-2"></i>
+                    Lire attentivement chaque question avant de répondre.
+                </li>
+                <li class="mb-2">
+                    <i class="fas fa-check text-success me-2"></i>
+                    Répondre à toutes les questions sans laisser de blancs.
+                </li>
+                <li class="mb-2">
+                    <i class="fas fa-check text-success me-2"></i>
+                    Vérifier vos réponses avant de soumettre.
+                </li>
+            </ul>
         </div>
-    <?php endif; ?>
-                
+
+        <!-- Timer Section -->
+        <?php if (isset($exam['duration']) && $exam['duration'] > 0): ?>
+        <div class="col-md-4 text-md-end text-center mt-3 mt-md-0">
+            <div class="timer-box bg-light border-start border-4 border-danger rounded p-3 d-inline-block shadow-sm">
+                <div class="d-flex align-items-center justify-content-center">
+                    <i class="fas fa-clock fa-lg text-danger me-2"></i>
+                    <strong class="text-danger fs-5">
+                        <span id="timer">--:--</span>
+                    </strong>
+                </div>
+                <div class="text-muted small mt-1">Temps restant</div>
+            </div>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
+
+
                 <div class="col-md-6">
-                
+
                     <h5><i class="fas fa-clipboard-list me-2"></i>Détails de l'examen</h5>
-                    
+
                     <ul class="mb-0">
                         <?php if (isset($exam['duration']) && $exam['duration'] > 0): ?>
                             <li>Durée: <?= $exam['duration'] ?> minutes</li>
@@ -272,7 +298,7 @@ ul li::before {
                     </ul>
                 </div>
             </div>
-            
+
             <!-- Anti-cheating notice -->
             <div class="cheating-notice mt-3">
                 <i class="fas fa-shield-alt"></i>
@@ -280,7 +306,8 @@ ul li::before {
                     <h5><strong>Système anti-triche actif</strong></h5>
                     <p class="arabic-proverb"><span dir="rtl" lang="ar">من غشنا فليس منا</span></p>
                     <p class="proverb-translation">"Quiconque nous trompe n'est pas des nôtres" - Hadith</p>
-                    <p>Pour garantir l'intégrité de l'examen, les activités suivantes sont surveillées et peuvent entraîner la fin automatique de votre examen :</p>
+                    <p>Pour garantir l'intégrité de l'examen, les activités suivantes sont surveillées et peuvent
+                        entraîner la fin automatique de votre examen :</p>
                     <ul>
                         <li>Changer d'onglet ou quitter l'examen</li>
                         <li>Copier/coller du contenu</li>
@@ -288,7 +315,8 @@ ul li::before {
                         <li>Quitter le mode plein écran</li>
                         <li>Utiliser des raccourcis clavier de navigation (Alt+Tab)</li>
                     </ul>
-                    <p class="mt-2 mb-0"><strong>Note :</strong> Après 5 avertissements, votre examen sera automatiquement soumis.</p>
+                    <p class="mt-2 mb-0"><strong>Note :</strong> Après 5 avertissements, votre examen sera
+                        automatiquement soumis.</p>
                 </div>
             </div>
         </div>
@@ -418,12 +446,12 @@ ul li::before {
         // Initial progress update
         updateProgress();
     </script>
-    
+
     <!-- Anti-Cheating System -->
     <script src="anti_cheating.js"></script>
     <script>
         // Initialize the anti-cheating system
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Load security settings (in production, these would come from the server)
             const securitySettings = {
                 examId: <?= $exam['id'] ?>,
@@ -438,16 +466,16 @@ ul li::before {
                 logSuspiciousActivity: true,
                 maxWarnings: 5
             };
-            
+
             // Initialize the anti-cheating system
             const antiCheat = new AntiCheatingSystem(securitySettings);
-            
+
             <?php if ($exam['duration'] > 0): ?>
-            // Show full screen button with explanation
-            const btnExplanation = document.createElement('div');
-            btnExplanation.className = 'fullscreen-explanation';
-            btnExplanation.innerHTML = '<p>Pour commencer l\'examen, veuillez activer le mode plein écran.</p>';
-            document.querySelector('#fullscreen-btn').parentNode.insertBefore(btnExplanation, document.querySelector('#fullscreen-btn').nextSibling);
+                // Show full screen button with explanation
+                const btnExplanation = document.createElement('div');
+                btnExplanation.className = 'fullscreen-explanation';
+                btnExplanation.innerHTML = '<p>Pour commencer l\'examen, veuillez activer le mode plein écran.</p>';
+                document.querySelector('#fullscreen-btn').parentNode.insertBefore(btnExplanation, document.querySelector('#fullscreen-btn').nextSibling);
             <?php endif; ?>
         });
     </script>
