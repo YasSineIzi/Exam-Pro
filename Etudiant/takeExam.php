@@ -58,6 +58,8 @@ try {
             }
         }
     }
+    unset($question); 
+
 } catch (Exception $e) {
     echo "Erreur : " . $e->getMessage();
 }

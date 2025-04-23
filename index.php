@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Préparer une requête pour récupérer l'utilisateur en fonction de l'email
         $sql = "SELECT id, name, email, password, role FROM users WHERE email = ?";
         $stmt = $conn->prepare($sql);
-
+        
         if ($stmt) {
             $stmt->bind_param("s", $email);
             $stmt->execute();

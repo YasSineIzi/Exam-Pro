@@ -29,27 +29,22 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    /* max-width: 800px; */
     margin: 2rem auto;
     padding: 0 1rem;
 }
 
-.main-content {
-    flex: 1;
-    padding: 2rem;
-    transition: all var(--transition-speed) ease;
-}
+/* 
+ */
 
 .main-content {
     margin-left: var(--sidebar-width);
     transition: margin-left var(--transition-speed) ease;
 }
 
-.container-fluid {
+/* .container-fluid {
     display: flex;
-}
-
-/* Ajout pour le mode réduit */
+} */
 .sidebar.collapsed~.container-fluid .main-content {
     margin-left: var(--collapsed-width);
 }

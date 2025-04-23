@@ -94,227 +94,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Créer un examen - ExamPro</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style/creerExam.css">
 
-
-    <style>
-        :root {
-            --primary-color: #6366f1;
-
-            --primary-hover: #2563eb;
-            --secondary-color: #f3f4f6;
-            --text-color: #1f2937;
-            --border-color: #e5e7eb;
-            --danger-color: #ef4444;
-            --danger-hover: #dc2626;
-            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --radius: 0.375rem;
-            --transition-speed: 0.3s;
-            --sidebar-width: 260px;
-            --collapsed-width: 80px;
-        }
-
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.5;
-            color: var(--text-color);
-            background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
-
-            background-color: var(--secondary-color);
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .container {
-            /* max-width: 800px; */
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        /* 
-         */
-
-        .main-content {
-            margin-left: var(--sidebar-width);
-            transition: margin-left var(--transition-speed) ease;
-        }
-
-        /* .container-fluid {
-            display: flex;
-        } */
-        .sidebar.collapsed~.container-fluid .main-content {
-            margin-left: var(--collapsed-width);
-        }
-
-
-
-        .card {
-            background: white;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-        }
-
-        .card-header {
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-input,
-        .form-textarea,
-        .form-select {
-            width: 100%;
-            padding: 0.5rem 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius);
-            font-size: 1rem;
-            transition: border-color 0.15s ease-in-out;
-        }
-
-        .form-input:focus,
-        .form-textarea:focus,
-        .form-select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        .form-row {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .form-row>* {
-            flex: 1;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            font-weight: 500;
-            text-align: center;
-            border: none;
-            border-radius: var(--radius);
-            cursor: pointer;
-            transition: background-color 0.15s ease-in-out;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-hover);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--secondary-color);
-        }
-
-        .btn-danger {
-            background-color: var(--danger-color);
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background-color: var(--danger-hover);
-        }
-
-        .option-group {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .option-group input[type="checkbox"] {
-            width: auto;
-        }
-
-        .button-group {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1.5rem;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .question-card {
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .header-title {
-            /* padding: 2rem; */
-            /* background-color: #f8f9fa; */
-            /* border-bottom: 1px solid #dee2e6; */
-            margin-bottom: 2rem;
-            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-        }
-
-        h1 {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        h1::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            /* background-color: #3498db; */
-            margin: 1rem auto;
-            border-radius: 2px;
-        }
-    </style>
+    <style></style>
 </head>
 
 <body>
@@ -392,176 +174,179 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <script>
-        let questionCounter = 0;
+    let questionCounter = 0;
 
-        // Fonction pour ajouter une nouvelle question
-        function addQuestion() {
-            questionCounter++;
-            const questionTemplate = `
-                <div class="card mb-3 question-card" data-question-id="${questionCounter}">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
-                            <h5 class="card-title">Question ${questionCounter}</h5>
-                            <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeQuestion(${questionCounter})">
-                                Supprimer
-                            </button>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">Type de question</label>
-                            <select class="form-select question-type" onchange="updateQuestionFields(${questionCounter})">
-                                <option value="mcq">QCM</option>
-                                <option value="short">Réponse courte</option>
-                                <option value="open">Question ouverte</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Énoncé de la question</label>
-                            <input type="text" class="form-control question-title" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Points</label>
-                            <input type="number" class="form-control question-points" value="1" min="1" required>
-                        </div>
-
-                        <div class="question-details"></div>
-                    </div>
-                </div>
-            `;
-
-            document.getElementById('questionsContainer').insertAdjacentHTML('beforeend', questionTemplate);
-            updateQuestionFields(questionCounter);
-        }
-
-        // Fonction pour mettre à jour les champs en fonction du type de question
-        function updateQuestionFields(questionId) {
-            const questionCard = document.querySelector(`[data-question-id="${questionId}"]`);
-            const type = questionCard.querySelector('.question-type').value;
-            const detailsContainer = questionCard.querySelector('.question-details');
-
-            let template = '';
-            if (type === 'mcq') {
-                template = `
-                    <div class="mb-3">
-                        <label class="form-label">Options</label>
-                        <div class="options-container">
-                            <div class="input-group mb-2">
-                                <input type="text" class="form-control option-text" placeholder="Option 1" required>
-                                <div class="input-group-text">
-                                    <input type="checkbox" class="option-correct" title="Cocher si c'est la bonne réponse">
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="addOption(${questionId})">
-                            Ajouter une option
+    // Fonction pour ajouter une nouvelle question
+    function addQuestion() {
+        questionCounter++;
+        const questionTemplate = `
+            <div class="card mb-3 question-card" data-question-id="${questionCounter}">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h5 class="card-title">Question ${questionCounter}</h5>
+                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeQuestion(${questionCounter})">
+                            Supprimer
                         </button>
                     </div>
-                `;
-            } else if (type === 'short') {
-                template = `
+                    
                     <div class="mb-3">
-                        <label class="form-label">Réponse attendue</label>
-                        <input type="text" class="form-control expected-answer" required>
+                        <label class="form-label">Type de question</label>
+                        <select class="form-select question-type" onchange="updateQuestionFields(${questionCounter})">
+                            <option value="mcq">QCM</option>
+                            <option value="short">Réponse courte</option>
+                            <option value="open">Question ouverte</option>
+                        </select>
                     </div>
-                `;
-            } else if (type === 'open') {
-                template = `
+
                     <div class="mb-3">
-                        <label class="form-label">Guide de correction</label>
-                        <textarea class="form-control correction-guide" rows="3"></textarea>
+                        <label class="form-label">Énoncé de la question</label>
+                        <input type="text" class="form-control question-title" required>
                     </div>
-                `;
-            }
 
-            detailsContainer.innerHTML = template;
-        }
-
-        // Fonction pour ajouter une option à une question QCM
-        function addOption(questionId) {
-            const questionCard = document.querySelector(`[data-question-id="${questionId}"]`);
-            const optionsContainer = questionCard.querySelector('.options-container');
-            const optionCount = optionsContainer.children.length + 1;
-
-            const optionTemplate = `
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control option-text" placeholder="Option ${optionCount}" required>
-                    <div class="input-group-text">
-                        <input type="checkbox" class="option-correct" title="Cocher si c'est la bonne réponse">
+                    <div class="mb-3">
+                        <label class="form-label">Points</label>
+                        <input type="number" class="form-control question-points" value="1" min="1" required>
                     </div>
+
+                    <div class="question-details"></div>
+                </div>
+            </div>
+        `;
+
+        document.getElementById('questionsContainer').insertAdjacentHTML('beforeend', questionTemplate);
+        updateQuestionFields(questionCounter);
+    }
+
+    // Fonction pour mettre à jour les champs en fonction du type de question
+    function updateQuestionFields(questionId) {
+        const questionCard = document.querySelector(`[data-question-id="${questionId}"]`);
+        const type = questionCard.querySelector('.question-type').value;
+        const detailsContainer = questionCard.querySelector('.question-details');
+
+        let template = '';
+        if (type === 'mcq') {
+            template = `
+                <div class="mb-3">
+                    <label class="form-label">Options</label>
+                    <div class="options-container">
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control option-text" placeholder="Option 1" required>
+                            <div class="input-group-text">
+                                <input type="checkbox" class="option-correct" title="Cocher si c'est la bonne réponse">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="addOption(${questionId})">
+                        Ajouter une option
+                    </button>
                 </div>
             `;
-            optionsContainer.insertAdjacentHTML('beforeend', optionTemplate);
+        } else if (type === 'short') {
+            template = `
+                <div class="mb-3">
+                    <label class="form-label">Réponse attendue</label>
+                    <input type="text" class="form-control expected-answer" required>
+                </div>
+            `;
+        } else if (type === 'open') {
+            template = `
+                <div class="mb-3">
+                    <label class="form-label">Guide de correction</label>
+                    <textarea class="form-control correction-guide" rows="3"></textarea>
+                </div>
+            `;
         }
 
-        // Fonction pour supprimer une question
-        function removeQuestion(questionId) {
-            const questionCard = document.querySelector(`[data-question-id="${questionId}"]`);
-            questionCard.remove();
-        }
+        detailsContainer.innerHTML = template;
+    }
 
-        // Gestion de la soumission du formulaire
-        document.getElementById('examForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
+    // Fonction pour ajouter une option à une question QCM
+    function addOption(questionId) {
+        const questionCard = document.querySelector(`[data-question-id="${questionId}"]`);
+        const optionsContainer = questionCard.querySelector('.options-container');
+        const optionCount = optionsContainer.children.length + 1;
 
-            const formData = new FormData(e.target);
-            const questions = [];
+        const optionTemplate = `
+            <div class="input-group mb-2">
+                <input type="text" class="form-control option-text" placeholder="Option ${optionCount}" required>
+                <div class="input-group-text">
+                    <input type="checkbox" class="option-correct" title="Cocher si c'est la bonne réponse">
+                </div>
+            </div>
+        `;
+        optionsContainer.insertAdjacentHTML('beforeend', optionTemplate);
+    }
 
-            // Collecter les données des questions
-            document.querySelectorAll('.question-card').forEach((questionCard) => {
-                const type = questionCard.querySelector('.question-type').value;
-                const title = questionCard.querySelector('.question-title').value;
-                const points = questionCard.querySelector('.question-points').value;
-                const details = {};
+    // Fonction pour supprimer une question
+    function removeQuestion(questionId) {
+        const questionCard = document.querySelector(`[data-question-id="${questionId}"]`);
+        questionCard.remove();
+    }
 
-                if (type === 'mcq') {
-                    details.options = [];
-                    questionCard.querySelectorAll('.input-group').forEach((group) => {
-                        const optionText = group.querySelector('.option-text').value;
-                        const isCorrect = group.querySelector('.option-correct').checked;
-                        details.options.push({ text: optionText, correct: isCorrect });
-                    });
-                } else if (type === 'short') {
-                    details.answer = questionCard.querySelector('.expected-answer').value;
-                } else if (type === 'open') {
-                    details.guide = questionCard.querySelector('.correction-guide').value;
-                }
+    // Gestion de la soumission du formulaire
+    document.getElementById('examForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-                questions.push({ title, type, points, details });
-            });
+        const formData = new FormData(e.target);
+        const questions = [];
 
-            // Envoyer les données au serveur
-            try {
-                const response = await fetch('creerExam.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams({
-                        examTitle: formData.get('examTitle'),
-                        examDescription: formData.get('examDescription'),
-                        examDuration: formData.get('examDuration'),
-                        courseId: formData.get('courseId'),
-                        questions: JSON.stringify(questions)
-                    })
+        // Collecter les données des questions
+        document.querySelectorAll('.question-card').forEach((questionCard) => {
+            const type = questionCard.querySelector('.question-type').value;
+            const title = questionCard.querySelector('.question-title').value;
+            const points = parseInt(questionCard.querySelector('.question-points').value, 10);
+            const details = {};
+
+            if (type === 'mcq') {
+                details.options = [];
+                const optionsContainer = questionCard.querySelector('.options-container');
+                optionsContainer.querySelectorAll('.input-group').forEach((group) => {
+                    const optionText = group.querySelector('.option-text').value;
+                    const isCorrect = group.querySelector('.option-correct').checked;
+                    details.options.push({ text: optionText, correct: isCorrect });
                 });
-
-                const result = await response.json();
-                if (result.status === 'success') {
-                    alert('Examen créé avec succès!');
-                    window.location.href = 'lesExamCreé.php';
-                } else {
-                    alert('Erreur lors de la création de l\'examen : ' + result.message);
-                }
-            } catch (error) {
-                alert('Erreur : ' + error.message);
+            } else if (type === 'short') {
+                details.answer = questionCard.querySelector('.expected-answer').value;
+            } else if (type === 'open') {
+                details.guide = questionCard.querySelector('.correction-guide').value;
             }
+
+            questions.push({ title, type, points, details: { ...details } });
         });
 
-        // Ajouter une question initiale
-        document.getElementById('addQuestion').addEventListener('click', addQuestion);
-    </script>
+        console.log("Questions envoyées :", questions); // DEBUG
+
+        // Envoyer les données au serveur
+        try {
+            const response = await fetch('creerExam.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    examTitle: formData.get('examTitle'),
+                    examDescription: formData.get('examDescription'),
+                    examDuration: formData.get('examDuration'),
+                    courseId: formData.get('courseId'),
+                    questions: JSON.stringify(questions)
+                })
+            });
+
+            const result = await response.json();
+            if (result.status === 'success') {
+                alert('Examen créé avec succès!');
+                window.location.href = 'lesExamCreé.php';
+            } else {
+                alert('Erreur lors de la création de l\'examen : ' + result.message);
+            }
+        } catch (error) {
+            alert('Erreur : ' + error.message);
+        }
+    });
+
+    // Ajouter une question initiale automatiquement
+    document.getElementById('addQuestion').addEventListener('click', addQuestion);
+</script>
 </body>
 
 </html>

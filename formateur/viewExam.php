@@ -73,6 +73,7 @@ try {
             $question['options'] = $stmt->fetchAll();
         }
     }
+    unset($question); 
 
 } catch (Exception $e) {
     $_SESSION['error'] = "Erreur : " . $e->getMessage();
@@ -150,7 +151,7 @@ try {
                             <?php endif; ?>
                         </div>
                     </div>
-            <?php endforeach; ?>
+            <?php endforeach; unset($question);?>
         </div>
     </main>
 
