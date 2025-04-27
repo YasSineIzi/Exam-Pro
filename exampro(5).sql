@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 23 avr. 2025 à 12:45
+-- Généré le : dim. 27 avr. 2025 à 13:59
 -- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.2.12
+-- Version de PHP : 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -55,14 +55,6 @@ CREATE TABLE `cours` (
   `published` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `cours`
---
-
-INSERT INTO `cours` (`id`, `name`, `description`, `file_path`, `created_at`, `published`) VALUES
-(1, 'Aproche agile', 'Aproche Agile', 'uploads/7. Approche agile_DevOps.pdf', '2025-01-06 13:18:37', NULL),
-(2, 'Aproche agile', 'Aproche Agile', 'uploads/7. Approche agile_DevOps.pdf', '2025-01-06 13:18:46', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -85,19 +77,6 @@ CREATE TABLE `exams` (
   `class_id` int(11) DEFAULT NULL,
   `published` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `exams`
---
-
-INSERT INTO `exams` (`id`, `name`, `course_id`, `start_date`, `end_date`, `duration`, `created_at`, `title`, `description`, `user_id`, `status`, `formateur_id`, `class_id`, `published`) VALUES
-(56, '', 1, NULL, NULL, 60, '2025-04-21 08:24:29', 'LARAVEL', 'Controlle continue N1', 72, 'published', 0, NULL, 1),
-(57, '', 2, NULL, NULL, 60, '2025-04-22 12:18:50', 'jhgf', '', 72, 'published', 0, NULL, 1),
-(58, '', 2, NULL, NULL, 60, '2025-04-23 10:00:09', 'dev201', 'l', 72, 'published', 0, 1, 1),
-(59, '', 2, NULL, NULL, 1, '2025-04-23 10:25:24', 'dev202', 's', 72, 'published', 0, 9, 1),
-(60, '', 1, NULL, NULL, 1, '2025-04-23 10:37:43', 'èyèrygf_è\'g', 'iuygu', 72, 'published', 0, 1, 1),
-(61, '', 1, NULL, NULL, 1, '2025-04-23 10:40:27', 'pupu', 'pu', 72, 'published', 0, 9, 1),
-(62, '', 1, NULL, NULL, 11, '2025-04-23 10:44:21', 'qauyuyf ', 'yyyg', 72, 'published', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -184,26 +163,6 @@ CREATE TABLE `questions` (
   `points` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `questions`
---
-
-INSERT INTO `questions` (`id`, `exam_id`, `question_text`, `type`, `created_at`, `question_title`, `details`, `points`) VALUES
-(90, 56, '', 'mcq', '2025-04-21 08:24:29', 'Que peut-on faire avec Laravel ?', NULL, 3),
-(91, 56, '', 'mcq', '2025-04-21 08:24:29', 'Quels fichiers trouve-t-on dans Laravel ?', NULL, 3),
-(92, 56, '', 'open', '2025-04-21 08:24:29', 'À quoi sert le fichier .env dans un projet Laravel ?', NULL, 4),
-(93, 56, '', 'open', '2025-04-21 08:24:29', 'Que fait la commande php artisan migrate ?', NULL, 4),
-(94, 56, '', 'short', '2025-04-21 08:24:29', 'Quelle commande sert à créer un contrôleur ?', NULL, 3),
-(95, 56, '', 'short', '2025-04-21 08:24:29', 'Quel dossier contient les routes dans Laravel ?', NULL, 3),
-(96, 57, '', 'mcq', '2025-04-22 12:18:50', 'hh', NULL, 1),
-(97, 57, '', 'short', '2025-04-22 12:18:50', 'mlkjhg', NULL, 1),
-(98, 58, '', 'mcq', '2025-04-23 10:00:09', 'jrjrj', NULL, 1),
-(99, 58, '', 'open', '2025-04-23 10:00:09', 'iruriir', NULL, 1),
-(100, 59, '', 'short', '2025-04-23 10:25:24', 'ssssssss', NULL, 20),
-(101, 60, '', 'short', '2025-04-23 10:37:43', 'iruopû', NULL, 20),
-(102, 61, '', 'short', '2025-04-23 10:40:27', 'u$u$u$u$u$u$u$u$u$u$u$u$u$u$u$', NULL, 20),
-(103, 62, '', 'short', '2025-04-23 10:44:21', 'jrjjr', NULL, 20);
-
 -- --------------------------------------------------------
 
 --
@@ -216,28 +175,6 @@ CREATE TABLE `question_options` (
   `option_text` text NOT NULL,
   `is_correct` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `question_options`
---
-
-INSERT INTO `question_options` (`id`, `question_id`, `option_text`, `is_correct`) VALUES
-(80, 90, 'A. Créer des sites web', 1),
-(81, 90, 'B. Gérer une base de données ', 1),
-(82, 90, ' C. Créer des vidéos ', 0),
-(83, 90, ' D. Faire des routes  ', 1),
-(84, 90, 'E. Écrire du CSS', 0),
-(85, 91, 'A. .env  ', 1),
-(86, 91, 'B. composer.json ', 1),
-(87, 91, ' C. style.css  ', 0),
-(88, 91, 'D. routes/web.php  ', 1),
-(89, 91, 'E. config/app.php', 1),
-(90, 96, 'gg', 0),
-(91, 96, 'yyy', 1),
-(92, 98, 'rir', 0),
-(93, 98, 'iir', 0),
-(94, 98, 'iririr', 1),
-(95, 98, 'irii', 0);
 
 -- --------------------------------------------------------
 
@@ -253,24 +190,6 @@ CREATE TABLE `results` (
   `status` enum('pass','fail','pending') DEFAULT 'pending',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `results`
---
-
-INSERT INTO `results` (`id`, `student_id`, `exam_id`, `score`, `status`, `created_at`) VALUES
-(50, 61, 56, NULL, 'pending', '2025-04-21 08:29:53'),
-(51, 61, 56, 16.00, 'pending', '2025-04-21 08:30:43'),
-(52, 61, 56, 15.00, 'pending', '2025-04-21 22:17:55'),
-(53, 74, 56, NULL, 'pending', '2025-04-22 12:08:25'),
-(54, 74, 57, NULL, 'pending', '2025-04-22 12:19:10'),
-(55, 74, 57, 2.00, 'pending', '2025-04-22 12:19:55'),
-(56, 74, 58, NULL, 'pending', '2025-04-23 10:19:23'),
-(57, 61, 59, NULL, 'pending', '2025-04-23 10:27:37'),
-(58, 61, 57, NULL, 'pending', '2025-04-23 10:28:59'),
-(59, 74, 60, NULL, 'pending', '2025-04-23 10:38:16'),
-(60, 61, 61, NULL, 'pending', '2025-04-23 10:41:27'),
-(61, 74, 62, NULL, 'pending', '2025-04-23 10:44:53');
 
 -- --------------------------------------------------------
 
@@ -303,40 +222,6 @@ CREATE TABLE `student_answers` (
   `points_attributed` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `student_answers`
---
-
-INSERT INTO `student_answers` (`id`, `student_id`, `exam_id`, `question_id`, `answer_text`, `option_id`, `is_correct`, `created_at`, `points_attributed`) VALUES
-(72, 61, 56, 90, NULL, 80, 1, '2025-04-21 08:29:53', 3),
-(73, 61, 56, 90, NULL, 81, 1, '2025-04-21 08:29:53', NULL),
-(74, 61, 56, 90, NULL, 83, 1, '2025-04-21 08:29:53', NULL),
-(75, 61, 56, 91, NULL, 85, 1, '2025-04-21 08:29:53', 3),
-(76, 61, 56, 91, NULL, 86, 1, '2025-04-21 08:29:53', NULL),
-(77, 61, 56, 91, NULL, 88, 1, '2025-04-21 08:29:53', NULL),
-(78, 61, 56, 91, NULL, 89, 1, '2025-04-21 08:29:53', NULL),
-(79, 61, 56, 92, 'oiuytrezaeghjklkjhygfd', NULL, NULL, '2025-04-21 08:29:53', 0),
-(80, 61, 56, 93, 'sert a transferer les donnes de user', NULL, NULL, '2025-04-21 08:29:53', 3),
-(81, 61, 56, 94, 'php artisan make:controller cntrler_chadi', NULL, NULL, '2025-04-21 08:29:53', 3),
-(82, 61, 56, 95, 'routes', NULL, NULL, '2025-04-21 08:29:53', 3),
-(83, 74, 56, 90, NULL, 80, 1, '2025-04-22 12:08:25', NULL),
-(84, 74, 56, 90, NULL, 82, 0, '2025-04-22 12:08:25', NULL),
-(85, 74, 56, 90, NULL, 83, 1, '2025-04-22 12:08:25', NULL),
-(86, 74, 56, 91, NULL, 86, 1, '2025-04-22 12:08:25', NULL),
-(87, 74, 56, 91, NULL, 88, 1, '2025-04-22 12:08:25', NULL),
-(88, 74, 56, 92, 'oiahdoizh', NULL, NULL, '2025-04-22 12:08:25', NULL),
-(89, 74, 56, 93, 'd', NULL, NULL, '2025-04-22 12:08:25', NULL),
-(90, 74, 56, 94, 'a', NULL, NULL, '2025-04-22 12:08:25', NULL),
-(91, 74, 56, 95, 's', NULL, NULL, '2025-04-22 12:08:25', NULL),
-(92, 74, 57, 96, NULL, 91, 1, '2025-04-22 12:19:10', 1),
-(93, 74, 57, 97, 'ghj', NULL, NULL, '2025-04-22 12:19:10', 1),
-(94, 74, 58, 99, '', NULL, NULL, '2025-04-23 10:19:23', NULL),
-(95, 61, 59, 100, 'cv', NULL, NULL, '2025-04-23 10:27:37', NULL),
-(96, 61, 57, 97, '', NULL, NULL, '2025-04-23 10:28:59', NULL),
-(97, 74, 60, 101, 'àçiu$àtrçu\'àr$i tguj', NULL, NULL, '2025-04-23 10:38:16', NULL),
-(98, 61, 61, 102, 'lpspl', NULL, NULL, '2025-04-23 10:41:27', NULL),
-(99, 74, 62, 103, 'hiutrhgoiu(r', NULL, NULL, '2025-04-23 10:44:53', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -362,7 +247,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `class`, `create
 (61, 'Chadi', 'VM18941@gmail.com', 'VM18941', 'student', 'DEV202', '2025-01-05 20:34:18', 9),
 (63, 'admine', 'admine@gmail.com', 'admin1234', 'admin', NULL, '2025-01-06 13:41:37', NULL),
 (72, 'el hayanni issam', 'elhayanni@gmail.com', 'elhayanni', 'teacher', NULL, '2025-04-21 06:42:12', NULL),
-(74, 'Yassine izi', 'yassineizi@gmail.com', 'yassineizi', 'student', 'DEV201', '2025-04-22 12:06:19', 1);
+(74, 'Yassine izi', 'yassineizi@gmail.com', 'yassineizi', 'student', 'DEV201', '2025-04-22 12:06:19', 1),
+(75, 'test', 'test@gmail.tes', 'test', 'student', 'DEV201', '2025-04-23 19:01:42', NULL);
 
 --
 -- Index pour les tables déchargées
@@ -487,13 +373,13 @@ ALTER TABLE `cours`
 -- AUTO_INCREMENT pour la table `exams`
 --
 ALTER TABLE `exams`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT pour la table `exam_activity_logs`
 --
 ALTER TABLE `exam_activity_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `exam_progress`
@@ -517,19 +403,19 @@ ALTER TABLE `exam_submissions`
 -- AUTO_INCREMENT pour la table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT pour la table `question_options`
 --
 ALTER TABLE `question_options`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT pour la table `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `settings`
@@ -541,13 +427,13 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT pour la table `student_answers`
 --
 ALTER TABLE `student_answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- Contraintes pour les tables déchargées
