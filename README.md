@@ -19,8 +19,7 @@ Avant de commencer, assurez-vous que vous disposez des outils suivants :
 
 - **PHP** (version 7.4 ou supérieure)
 - **Composer** pour gérer les dépendances PHP
-- **MySQL** ou **MariaDB** pour la base de données
-- **Node.js** et **NPM** pour la gestion des dépendances front-end
+- **MySQL** pour la base de données
 
 ### Étapes d'installation
 
